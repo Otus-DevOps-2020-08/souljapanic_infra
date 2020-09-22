@@ -72,8 +72,11 @@ scp -i ~/.ssh/appuser deploy.sh yc-user@130.193.48.195:/home/yc-user/
 
 ```
 ssh yc-user@178.154.225.5 -i ~/.ssh/appuser - подключаемся к машине
+
 ./install_ruby.sh - установка ruby
+
 ./install_mongodb.sh - установка mongo
+
 ./deploy.sh - установка приложения
 ```
 
@@ -87,5 +90,5 @@ testapp_port = 9292
 ### Развёртывание при заказе виртуальной машины:
 
 ```
-yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=./metadata.yam
+yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=metadata.yam
 ```
