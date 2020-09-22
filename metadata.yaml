@@ -4,6 +4,12 @@ timezone: Asia/Tomsk
 
 disable_root: true
 
+repo_update: true
+repo_upgrade: true
+
+apt:
+  preserve_sources_list: true
+
 users:
   - name: appuser
     ssh-authorized-keys:
@@ -12,9 +18,6 @@ users:
     groups: sudo
     shell: /bin/bash
 
-package_update: true
-package_upgrade: true
-
 packages:
   - git
   - ruby-full
@@ -22,12 +25,14 @@ packages:
   - build-essential
 
 runcmd:
-  - wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
-  - echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.2.list
-  - apt update && apt install -y mongodb-org
-  - systemctl enable mongod --now
+  - wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
+  - echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+  - apt-get install -y apt-transport-https ca-certificates libcurl3-gnutls
+  - apt-get update
+  - apt-get install -y mongodb-org
+  - systemctl start mongod
+  - systemctl enable mongod
   - cd /home/appuser
   - git clone -b monolith https://github.com/express42/reddit.git
-  - cd /home/appuser/reddit
-  - bundle install
+  - cd reddit && bundle install
   - puma -d
