@@ -51,7 +51,7 @@ apt:
 
 package_update: true
 package_upgrade: true
-# package_reboot_if_required: true
+package_reboot_if_required: true
 
 packages:
   - git
@@ -63,9 +63,7 @@ packages:
 runcmd:
   - echo $(ruby -v)
   - echo $(bundler -v)
-  - systemctl start mongod
-  - systemctl enable mongod
-  # - systemctl enable mongod --now
+  - systemctl enable mongod --now
   - cd /home/appuser
   - git clone -b monolith https://github.com/express42/reddit.git
   - cd /home/appuser/reddit
