@@ -60,18 +60,12 @@ someinternalhost_IP = 10.130.0.10
 
 ### Ручное развёртывание приложения:
 
-- Заказ виртуальной машины:
-
-```
-yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --ssh-key ~/.ssh/appuser.pub
-```
-
 - Копирование сценариев установки:
 
 ```
-scp -i ~/.ssh/appuser install_ruby.sh yc-user@178.154.225.5:/home/yc-user/
-scp -i ~/.ssh/appuser install_mongodb.sh yc-user@178.154.225.5:/home/yc-user/
-scp -i ~/.ssh/appuser deploy.sh yc-user@178.154.225.5:/home/yc-user/
+scp -i ~/.ssh/appuser install_ruby.sh yc-user@130.193.48.195:/home/yc-user/
+scp -i ~/.ssh/appuser install_mongodb.sh yc-user@130.193.48.195:/home/yc-user/
+scp -i ~/.ssh/appuser deploy.sh yc-user@130.193.48.195:/home/yc-user/
 ```
 
 - Установка:
@@ -93,5 +87,5 @@ testapp_port = 9292
 ### Развёртывание при заказе виртуальной машины:
 
 ```
-yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=./metadata.yam
+yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=metadata.yam
 ```
