@@ -73,9 +73,9 @@ scp -i ~/.ssh/appuser deploy.sh yc-user@130.193.48.195:/home/yc-user/
 ```
 ssh yc-user@178.154.225.5 -i ~/.ssh/appuser - подключаемся к машине
 
-./install_ruby.sh - установка ruby
+sudo ./install_ruby.sh - установка ruby
 
-./install_mongodb.sh - установка mongo
+sudo ./install_mongodb.sh - установка mongo
 
 ./deploy.sh - установка приложения
 ```

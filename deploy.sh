@@ -1,10 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-function deployApp {
-	sudo apt update && sudo apt install -y git
-	git clone -b monolith https://github.com/express42/reddit.git
-	cd reddit && bundle install
-	puma -d
-}
-
-deployApp
+git clone -b monolith https://github.com/express42/reddit.git
+cd reddit && bundle install
+puma -d
