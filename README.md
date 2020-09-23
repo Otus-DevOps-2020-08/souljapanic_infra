@@ -113,11 +113,11 @@ yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --
 
 - cd packer/
 
-- packer validate -var-file=./variables.json ./ubuntu16.json
+- packer validate -var-file=./variables.json ./ubuntu.json
 
 - packer validate -var-file=./variables.json ./immutable.json
 
-- packer build -var-file=./variables.json ./ubuntu16.json
+- packer build -var-file=./variables.json ./ubuntu.json
 
 - packer build -var-file=./variables.json ./immutable.json
 
