@@ -2,6 +2,7 @@
     "variables": {
 	    "folder_id": "",
 	    "source_image_family": "",
+	    "token": "",
 	    "ssh_username": "",
 	    "platform_id": "",
 	    "image_description": ""
@@ -9,6 +10,7 @@
     "builders": [
         {
             "type": "yandex",
+            "token": "{{ user `token`}}",
             "folder_id": "{{user `folder_id`}}",
             "source_image_family": "{{user `source_image_family`}}",
             "image_name": "reddit-base-{{timestamp}}",
