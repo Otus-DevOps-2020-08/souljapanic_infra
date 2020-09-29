@@ -90,5 +90,43 @@ testapp_port = 9292
 ### Развёртывание при заказе виртуальной машины:
 
 ```
-yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=metadata.yam
+yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=metadata.yaml
 ```
+
+## HW5 (packer-base)
+
+### Создание сервисного аккаунта и ключа с помощью YA CLI:
+
+- SVC_ACCT="name_svc"
+
+- FOLDER_ID="folder_id"
+
+- yc iam service-account create --name $SVC_ACCT --folder-id $FOLDER_ID
+
+- ACCT_ID=$(yc iam service-account get $SVC_ACCT | grep ^id | awk '{print $2}')
+
+- yc resource-manager folder add-access-binding --id $FOLDER_ID --role editor --service-account-id $ACCT_ID
+
+- yc iam key create --service-account-id $ACCT_ID --output name_key.key
+
+### Сборка образа с помощью packer:
+
+- cd packer/
+
+- packer validate -var-file=./variables.json ./ubuntu.json
+
+- packer validate -var-file=./variables.json ./immutable.json
+
+- packer build -var-file=./variables.json ./ubuntu.json
+
+- packer build -var-file=./variables.json ./immutable.json
+
+### Заказ виртуальной машины на основе собранного образа:
+
+- cd config-scripts/
+
+- ./create-reddit-vm.sh
+
+OR
+
+- yc compute instance create --name reddit-app --hostname reddit-app --memory=4 --create-boot-disk image-folder-id=b1grddgb097trkpsvol5,image-name=reddit-full-1600881116,size=10GB --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=metadata_slim.yaml

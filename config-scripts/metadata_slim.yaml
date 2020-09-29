@@ -1,0 +1,13 @@
+#cloud-config
+
+timezone: Asia/Tomsk
+
+disable_root: true
+
+users:
+  - name: appuser
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDEI2aoTHu4B2ZHFu1C3pTYyO1sXbqnydSlxT/Q9CBn04CrPiZNAENuWUA/EAlhD0mlA3el3Mkk2OthLuhPRLTeGZMina5+wuGeTWo5TZw/ofLB7g5OgFsqq/L+abVIVxqnnDG+gLAmtxgjzjnqPCBL5lMEIVha2hA5HbBKiTZIGA6H69s7tDD7RBKJQOihWroHtAog8QbWJwNGBUtXVRSB2pFSX8BLWBW85AbzTGI2JqPnpqjI6HgQ91h6Kp5pJ/VhP2IWOehddTHjNByyv70UW00Ylv++UNvgk7SC8bZkuckZO2dnp6yjUIKyvTHxDaqV8tjmO8JGCUGmUC+E7EWPQE82qHkobaQCZjMuxhqXprUc0AQdGY+PXHb/eTwICbH+Z71zSDQ6RLe62g85fq9thNz58s+N9Z0sKBW8442/OCFoHiWOZP60MBCDj7SQ9/txOcCSjmrOgl9Vd0YmJF/rbtmX17ItZRwTEOA74IkDMFHECcl6ZswvxODR0AyKgwM= appuser
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
